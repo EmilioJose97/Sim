@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AngularCsv } from 'angular7-csv/dist/Angular-csv'
-import { RadService } from '../services/rad.service';
+
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -10,7 +10,7 @@ import { saveAs } from 'file-saver';
 })
 export class HeaderComponent implements OnInit {
   @Output() featureSelected = new EventEmitter<string>();
-  constructor(private radService: RadService) { }
+  constructor() { }
 
   dtRegistro :any;
 
@@ -26,18 +26,10 @@ export class HeaderComponent implements OnInit {
     headers: ["ID", "Latitud", "Longitud", "Área", "Área útil","Adultos","Niños","Ancianos","Adultos trabajo","Ancianos trabajo","Cocina de inducción","Lavadora","Secadora eléctrica","Ducha","Generación anual","Consumo mensual","Inversión","LCOE","TIR"]
   };
 
-  exportPdf() {
-    this.radService.export().subscribe(data => saveAs(data, `Manual técnico .pdf`));
-}
+  
 
   ngOnInit() {
-    this.radService.getRegistro()
-      .subscribe(
-        res => {
-          this.dtRegistro = res;
-        },
-        err => console.error(err)
-      );
+    
   }
 
   Descargar(){
